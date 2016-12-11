@@ -16,6 +16,10 @@ import javafx.util.Pair;
  */
 public class AdventOfCode2016_Day1 {
 
+    private static final int NUM_OF_DIRECTIONS = 4;
+    private static final int NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3;
+    private static final int DECIMAL = 10;
+    
     /**
      * @param args the command line arguments
      */
@@ -27,6 +31,7 @@ public class AdventOfCode2016_Day1 {
         // Convert to array of strings, so we can look at them one by one
         List<String> instructions = Arrays.asList(input.split("\\s*,\\s*"));
 
+        // List of all locations we've hit, including start
         List<Pair<Integer, Integer>> coordinates = new ArrayList<>();
         coordinates.add(new Pair(0, 0));
 
@@ -40,16 +45,18 @@ public class AdventOfCode2016_Day1 {
             // Either R or L
             char turn = step.charAt(0);
 
-            // Get the # of blocks to move in given direction
+            // Get the # of blocks to move in given direction; we need to
+            // convert the string number into an actual integer
             int blocksToMove = 0;
             for (int digitIndex = 1; digitIndex < step.length(); digitIndex++) {
                 char digit = step.charAt(digitIndex);
-                blocksToMove += (int) ((digit - '0') * Math.pow(10, (step.length() - 1 - digitIndex)));
+                blocksToMove += (int) ((digit - '0') * 
+                        Math.pow(DECIMAL, (step.length() - 1 - digitIndex)));
             }
 
             // For Part 2, need to add every coordinate we've traversed
             // Just for clarity, the incrementation is separate from the loop
-            direction = getDirection(direction, turn) % 4;
+            direction = getDirection(direction, turn) % NUM_OF_DIRECTIONS;
             switch (direction) {
                 case 0: // North
                     for (int i = 1; i <= blocksToMove; i++) {
@@ -79,7 +86,8 @@ public class AdventOfCode2016_Day1 {
         }
 
         // Part 1 answer
-        System.out.println("Total blocks away: " + (Math.abs(numBlocksV) + Math.abs(numBlocksH)));
+        System.out.println("Total blocks away: " + 
+                (Math.abs(numBlocksV) + Math.abs(numBlocksH)));
 
         // Part 2 answer, requires you to do some math
         // Do a linear search, O(n^2); if we find the same coordinate pair, 
@@ -110,10 +118,12 @@ public class AdventOfCode2016_Day1 {
             return curDir + 1;
         }
 
-        // Going left - make sure if we're going negative, reset back to 3
-        if (curDir < 1) {
-            return 3;
+        // Going left - make sure if we're going negative (west), reset to west
+        if (curDir == NORTH) {
+            return WEST;
         }
+        
+        // Otherwise, we just subtract
         return curDir - 1;
     }
 
