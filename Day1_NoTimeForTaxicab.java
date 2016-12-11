@@ -14,7 +14,7 @@ import javafx.util.Pair;
  *
  * @author David
  */
-public class AdventOfCode2016_Day1 {
+public class Day1_NoTimeForTaxicab {
 
     private static final int NUM_OF_DIRECTIONS = 4;
     private static final int NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3;
