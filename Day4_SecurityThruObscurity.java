@@ -27,8 +27,8 @@ import java.util.TreeMap;
  */
 public class Day4_SecurityThruObscurity {
 
-    private static final char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().toCharArray();
-    private static final String input_file = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day4_input.txt";
+    private static final char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().toCharArray();
+    private static final String INPUT_FILE = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day4_input.txt";
     private static final int DECIMAL = 10;
     private static String rotatedString;
 
@@ -42,7 +42,7 @@ public class Day4_SecurityThruObscurity {
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
         // Read from the input file
-        InputStream is = new FileInputStream(new File(input_file));
+        InputStream is = new FileInputStream(new File(INPUT_FILE));
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
         // Sum of valid sector IDs
@@ -118,7 +118,7 @@ public class Day4_SecurityThruObscurity {
             for (String crypt : input) {
                 char[] letters = crypt.toLowerCase().toCharArray();
                 for (char letter : letters) {
-                    rotatedString += alphabet[((letter - 'a') + sectorID) % alphabet.length];
+                    rotatedString += ALPHABET[((letter - 'a') + sectorID) % ALPHABET.length];
                 }
                 rotatedString += " ";
             }

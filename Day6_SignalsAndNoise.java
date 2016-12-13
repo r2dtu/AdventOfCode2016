@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public class Day6_SignalsAndNoise {
 
-    private static final String input_file = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day6_input.txt";
+    private static final String INPUT_FILE = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day6_input.txt";
 
     /**
      * Runs the Day 6 Solutions.
@@ -36,7 +36,7 @@ public class Day6_SignalsAndNoise {
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
         // Read the input from the file
-        InputStream is1 = new FileInputStream(new File(input_file));
+        InputStream is1 = new FileInputStream(new File(INPUT_FILE));
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is1))) {
             String line;
             

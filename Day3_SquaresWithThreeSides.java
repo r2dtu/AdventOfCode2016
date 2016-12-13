@@ -23,7 +23,7 @@ public class Day3_SquaresWithThreeSides {
 
     private static final int DECIMAL = 10;
     private static final int NUM_SIDES_TRIANGLE = 3;
-    private static final String input_file = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day3_input.txt";
+    private static final String INPUT_FILE = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day3_input.txt";
 
     /**
      * Runs the solution for Part 1 and 2 for Day 3.
@@ -33,7 +33,7 @@ public class Day3_SquaresWithThreeSides {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
-        InputStream is = new FileInputStream(new File(input_file));
+        InputStream is = new FileInputStream(new File(INPUT_FILE));
 
         /**
          * Part 1.
@@ -53,7 +53,7 @@ public class Day3_SquaresWithThreeSides {
             System.out.println("Number of real triangles (Part 1): " + numTriangles);
         }
 
-        InputStream is1 = new FileInputStream(new File(input_file));
+        InputStream is1 = new FileInputStream(new File(INPUT_FILE));
 
         /**
          * Part 2.
