@@ -26,10 +26,10 @@ public class Day3_SquaresWithThreeSides {
     private static final String input_file = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day3_input.txt";
 
     /**
-     *
-     * @param args
-     * @throws FileNotFoundException
-     * @throws IOException
+     * Runs the solution for Part 1 and 2 for Day 3.
+     * @param args - command line arguments (none)
+     * @throws FileNotFoundException - for input file
+     * @throws IOException - for reading the lines of the file
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -80,6 +80,13 @@ public class Day3_SquaresWithThreeSides {
         }
     }
 
+    /**
+     * Reads in the side lengths from 1 line of the input file. See input_file
+     * for an example of the layout.
+     * @param input - line read from file as a list of strings (separated by 
+     *                spaces)
+     * @return integer array of the sides of the triangle
+     */
     private static int[] getSides(List<String> input) {
         int[] sides = new int[NUM_SIDES_TRIANGLE];
         int index = 0;
@@ -97,6 +104,12 @@ public class Day3_SquaresWithThreeSides {
         return sides;
     }
 
+    /**
+     * Determines whether the triangle is real or not given the side lengths. 
+     * The sum of any two sides must be larger than the last side.
+     * @param sides - 3 side lengths of the "triangle"
+     * @return true if real triangle, false if not
+     */
     private static boolean isTriangle(int[] sides) {
         return (sides[0] + sides[1] > sides[2]
                 && sides[0] + sides[2] > sides[1]
@@ -104,6 +117,15 @@ public class Day3_SquaresWithThreeSides {
                 && sides[1] + sides[2] > sides[0]);
     }
 
+    /**
+     * For Part 2. Columns of 3 are now the triangle side lengths instead of 
+     * rows. We need 3 rows at a time, and we use the same index for every
+     * array and use those as the triangle's sides.
+     * @param sides1
+     * @param sides2
+     * @param sides3
+     * @return 
+     */
     private static int isTriangle(int[] sides1, int[] sides2, int[] sides3) {
         int numTriangles = 0;
         for (int i = 0; i < 3; i++) {
