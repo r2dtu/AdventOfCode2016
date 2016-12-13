@@ -30,6 +30,7 @@ public class Day4_SecurityThruObscurity {
     private static final char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().toCharArray();
     private static final String input_file = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day4_input.txt";
     private static final int DECIMAL = 10;
+    private static String rotatedString;
 
     /**
      * Runs the Day 4 solutions.
@@ -49,6 +50,11 @@ public class Day4_SecurityThruObscurity {
 
         String line;
         while ((line = reader.readLine()) != null) {
+
+            // Reset the name for each line
+            rotatedString = "";
+
+            // Split the words with dash or the checksum []s
             List<String> input = Arrays.asList(line.split("-|\\["));
             HashMap<Character, Integer> common_letters = new HashMap<>();
             int sectorID = 0;
@@ -83,15 +89,15 @@ public class Day4_SecurityThruObscurity {
             // thankfully, creating a TreeMap sorts the keys for us! How
             // convenient (alphabetical order).
             Map<Character, Integer> alphaSortedLetters = new TreeMap<>(common_letters);
-            
+
             // Sort the values in descending order, so the maximum is first.
             List<Character> keys = new ArrayList<>(alphaSortedLetters.keySet());
             Collections.sort(keys, descendingValueComparator(alphaSortedLetters));
-            
+
             // Now we can compare the key values to the checksum array 1 by 1.
             int counter = 0;
             for (Character key : keys) {
-                
+
                 // If we've matched all 5 characters, we're done!
                 if (counter > 4) {
                     break;
@@ -107,25 +113,33 @@ public class Day4_SecurityThruObscurity {
             if (counter > 4) {
                 sumOfSectorIDs += sectorID;
             }
+
+            // For Part 2: we're going to rotate all the letters
+            for (String crypt : input) {
+                char[] letters = crypt.toLowerCase().toCharArray();
+                for (char letter : letters) {
+                    rotatedString += alphabet[((letter - 'a') + sectorID) % alphabet.length];
+                }
+                rotatedString += " ";
+            }
+
+            System.out.println(rotatedString + " " + sectorID);
         }
+
         System.out.println("Sum of valid sector IDs: " + sumOfSectorIDs);
     }
 
     /**
-     * Used to sort in descending order.
+     * Used to sort a hash map in descending value order.
      *
-     * @param <K>
-     * @param <V>
-     * @param map
-     * @return
+     * @param <K> key
+     * @param <V> value
+     * @param map hash map to sort
+     * @return hash map sorted in descending order by value
      */
     public static <K, V extends Comparable<? super V>>
             Comparator<K> descendingValueComparator(final Map<K, V> map) {
-        return new Comparator<K>() {
-            public int compare(K key1, K key2) {
-                return map.get(key2).compareTo(map.get(key1));
-            }
-        };
+        return (K key1, K key2) -> map.get(key2).compareTo(map.get(key1));
     }
 
     /**
