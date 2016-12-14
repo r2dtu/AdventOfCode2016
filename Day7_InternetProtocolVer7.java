@@ -25,25 +25,43 @@ import java.util.List;
 public class Day7_InternetProtocolVer7 {
 
     private static final String INPUT_FILE = "C:\\Users\\David\\Documents\\NetBeansProjects\\AdventOfCode2016\\src\\adventofcode2016\\Day7_input.txt";
-    private static List<String> ABAStrings = new ArrayList<>();
-    private static List<String> BABStrings = new ArrayList<>();
+    private static final List<String> ABAStrings = new ArrayList<>();
+    private static final List<String> BABStrings = new ArrayList<>();
 
+    /**
+     * Runs the Day 7 solutions.
+     * @param args
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
+        // Keep track of TLS & SLS supported IPs
         int numTLSsupport = 0, numSLSsupport = 0;
+        
+        // Read from file
         InputStream is1 = new FileInputStream(new File(INPUT_FILE));
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(is1))) {
+            
+            // Read through each line
             String line;
             while ((line = reader.readLine()) != null) {
+                
+                // New line - clear old ABA / BAB strings
                 ABAStrings.clear();
                 BABStrings.clear();
                 boolean supportsTLS = false;
                 boolean supportsSLS = false;
+                
+                // Separate each part of the IP name (unbracketed / bracketed)
                 List<String> input = Arrays.asList(line.toLowerCase().split("\\[|\\]"));
-                System.out.println(input);
+
+                // We need to store the aba & bab strings to compare later
                 int index = 0;
                 List<String> aba = new ArrayList<>();
                 List<String> bab = new ArrayList<>();
+                
+                // For Part 1: Finding ABBA strings
                 for (String crypt : input) {
                     // Square brackets
                     if (index % 2 != 0) {
@@ -61,6 +79,8 @@ public class Day7_InternetProtocolVer7 {
                     index++;
                 }
 
+                // For Part 2: Finding ABA / BAB sequences
+                // Implementation: Find all ABA sequences first, then BAB
                 for (index = 0; index < input.size();) {
                     // Outside square brackets - ABA
                     if (index % 2 == 0) {
@@ -107,11 +127,11 @@ public class Day7_InternetProtocolVer7 {
             }
         }
 
+        // We're done! Print out number of IPs supporting TLS and SLS
         System.out.println(
                 "Number of IPs that support TLS: " + numTLSsupport);
         System.out.println(
                 "Number of IPs that support SLS: " + numSLSsupport);
-
     }
 
     /**
