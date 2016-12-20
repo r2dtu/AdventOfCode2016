@@ -28,7 +28,8 @@ public class Day8_TwoFactorAuth {
      * Runs the Day 8 solutions.
      *
      * @param args
-     * @throws java.io.FileNotFoundException
+     * @throws FileNotFoundException
+     * @throws IOException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -84,7 +85,7 @@ public class Day8_TwoFactorAuth {
                     );
                     int rotateVal = Integer.parseInt(
                             line.substring(line.indexOf("by") + 3),
-                                    line.length()
+                            line.length()
                     );
 
                     for (int rotated = 0; rotated < rotateVal; rotated++) {
