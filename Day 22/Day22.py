@@ -11,7 +11,6 @@ for node in nodes:
 
 	# node pos | size | used | avail | use%
 	sp = node.split()
-	print(int(sp[3][:-1]))
 	if sp[2] != '0T':
 		for nextNode in nodes:
 			if nextNode == node:
