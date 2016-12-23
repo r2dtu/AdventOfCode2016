@@ -1,10 +1,16 @@
 import hashlib
 
-input_string = 'ihaygndm'
-counter = 3098
-comb = input_string + str(counter)
-hash = hashlib.md5(comb.encode('utf-8')).hexdigest()
+def getHash(hash, times):
+	# Implements Parts 1 & 2 (key stretching)
+	for i in range(0, times):
+		hash = hashlib.md5(hash.encode('utf-8')).hexdigest()
+	return hash
+
+input_string = 'abc'
+counter = 39
+hash = getHash(input_string + str(counter), 1)
 print(hash)
+
 counter2 = counter
 
 for char in hash:
